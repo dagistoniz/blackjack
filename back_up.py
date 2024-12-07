@@ -162,11 +162,29 @@ class Main():
         for widget in root.winfo_children():
 
             widget.destroy()
-        
+        # self.proceed_to_game_button.place_forget()
+        # self.prepare_label.place_forget()
         self.image_game = Image.open("pngwing.com (4).png")
         self.background_image_game = ImageTk.PhotoImage(self.image_game)
         self.background_label = tk.Label(self.root, image=self.background_image_game)
         self.background_label.place(relwidth=1, relheight=1)
+
+        # self.background_label.configure (image=self.background_image_game)
+        # with sq.connect ("game_data") as con:
+        #     cur = con.cursor ()
+        #     cur.execute ("""CREATE TABLE IF NOT EXISTS game_data (
+        #                  user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        #                  score INTEGER DEFAULT 1000
+        #     )""")
+        #     cur.execute ("""INSERT INTO game_data""")
+        # with sq.connect ("game_data") as con:
+        #     cur = con.cursor ()
+        #     cur.execute ("""SELECT * FROM game_data""")
+        #     game_data = cur.fetchall ()
+
+        # with sq.connect ("players_database") as con:
+        #     cur = con.cursor ()
+        #     cur.execute ("""ALTER TABLE players_database ADD COLUMN score INTEGER;""")
 
         with sq.connect ("players_database") as con:
             cur = con.cursor ()
@@ -221,7 +239,7 @@ class Main():
             self.cards.place_forget()
             self.entry_bet.place_forget()
 
-
+            # time.sleep(0.5)
             bet = tk.StringVar (value=self.value_bet)
             self.bet_label = tk.Label (textvariable=bet)
             self.bet_label.place (relx=0.3, rely=0.3)
@@ -296,12 +314,13 @@ class Main():
         self.image_second_card = ImageTk.PhotoImage(self.image_second_card)
         self.first_card_label = tk.Label (image=self.image_first_cards)
         self.second_card_label = tk.Label (image = self.image_second_card)
-        
+        # .place (relx=0.40, rely=0.58)
+        # place (relx=0.5, rely=0.58)
         self.first_card_label.place(relx=0.35, rely=0.58)
         self.second_card_label.place(relx=0.35, rely=0.58)
         self.animate_cards()
 
-
+        #temp
     def animate_cards(self):
 
         first_card_x = self.first_card_label.winfo_x()
@@ -318,7 +337,7 @@ class Main():
             self.root.after(50, self.animate_cards)
 
     def get_dealer_hand(self):
-
+        # time.sleep(0.5)
         self.dealer_hand = []
         for i in range (2):
             self.dealer_hand.append (self.main_deck.pop())
@@ -368,7 +387,7 @@ class Main():
         return card[0].lower() + "_" + card[1] + "_" + card[2].lower() + ".png"
 
     def add_card (self):
-
+        # time.sleep(0.5)
         if len(self.player_hand) < 5:
             if len(self.player_hand) ==2:
                 self.player_hand.append(self.main_deck.pop())
@@ -498,7 +517,23 @@ class Main():
         except Exception:
             pass
 
-        
+        # elif 21-self.count_hand_player(self.player_hand) == 21 - self.count_hand_dealer(self.dealer_hand)[1]:
+        #     ms.showinfo (title="Reules", message="Draw!")
+        #     self.temp_balance = float (self.temp_balance)+float (self.value_bet)
+        #     self.balance.set (self.temp_balance)
+        #     with sq.connect ("game_data") as con:
+        #         cur = con.cursor ()
+        #         cur.execute ("""UPDATE game_data
+        #                      SET score = ?
+        #                      WHERE user_id = ?""",(self.temp_balance, 1))
+        # else:
+        #     ms.showinfo (title="Reules",message="Dealer win!")
+        #     with sq.connect ("game_data") as con:
+        #         cur = con.cursor ()
+        #         cur.execute ("""UPDATE game_data
+        #                      SET score = ?
+        #                      WHERE user_id = ?""",(self.temp_balance, 1))
+        # self.proceed_to_game()
 
     def stop_take (self):
         self.second_card_label_v2.configure (image=self.future)

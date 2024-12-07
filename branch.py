@@ -25,6 +25,18 @@ def create_deck():
 
 deck = create_deck()
 
-random.shuffle(deck)  
+def deal_cards(deck, num_players: 2, cards_per_player: 2):
+    random.shuffle (deck)
+    hands = {"Player": [], "Dealer": []}
+
+    for _ in range (cards_per_player):
+        for player in hands.keys():
+            if deck:
+                hands[player].append (deck.pop())
+    
+    return hands
+
+
+
 
 root.mainloop()
